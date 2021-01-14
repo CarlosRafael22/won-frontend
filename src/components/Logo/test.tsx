@@ -39,4 +39,13 @@ describe('<Logo />', () => {
       width: '20rem'
     })
   })
+
+  it('should render a bigger logo and not render text when hideOnMobile is true', () => {
+    const { container } = renderWithTheme(<Logo hideOnMobile />)
+    expect(
+      screen.getByLabelText(/Won Games/i).parentElement
+    ).toHaveStyleRule('width', '5.8rem', {
+      media: '(max-width: 768px)'
+    })
+  })
 })
