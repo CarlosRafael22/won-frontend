@@ -1,14 +1,24 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
+import { renderWithTheme } from 'utils/tests/helpers'
 
 import Logo from '.'
 
 describe('<Logo />', () => {
-  it('should render a heading in the component', () => {
-    const { container } = render(<Logo />)
+  it('should render white by default', () => {
+    const { container } = renderWithTheme(<Logo />)
     expect(
-      screen.getByRole('heading', { name: /Logo/i })
-    ).toBeInTheDocument()
+      screen.getByLabelText(/Won Games/i).parentElement
+    ).toHaveStyle({
+      color: '#FAFAFA'
+    })
+  })
 
-    expect(container.firstChild).toMatchSnapshot()
+  it('should render black when color is passed', () => {
+    const { container } = renderWithTheme(<Logo color={'black'} />)
+    expect(
+      screen.getByLabelText(/Won Games/i).parentElement
+    ).toHaveStyle({
+      color: '#030517'
+    })
   })
 })
