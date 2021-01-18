@@ -24,10 +24,17 @@ describe('<Button />', () => {
 
   it('should render the large button when size prop was passed', () => {
     renderWithTheme(<Button size='large'>Buy now</Button>)
-    expect(screen.getByRole('button')).toHaveStyle({
+    expect(screen.getByRole('button', { name: /Buy now/i })).toHaveStyle({
       padding: '0.8rem 4.8rem',
       height: '5rem',
       fontSize: '1.6rem'
+    })
+  })
+
+  it('should render the fullWidth when prop was passed', () => {
+    renderWithTheme(<Button fullWidth>Buy now</Button>)
+    expect(screen.getByRole('button', { name: /Buy now/i })).toHaveStyle({
+      width: '100%'
     })
   })
 })
