@@ -7,17 +7,17 @@ import Logo from 'components/Logo'
 const Menu = () => (
   <Style.Wrapper>
     <Style.IconWrapper>
-      <MenuIcon />
+      <MenuIcon aria-label="Open Menu" />
     </Style.IconWrapper>
     <Style.LogoWrapper>
       <Logo hideOnMobile />
     </Style.LogoWrapper>
     <Style.MenuGroup>
       <Style.IconWrapper>
-        <SearchIcon />
+        <SearchIcon aria-label="Search" />
       </Style.IconWrapper>
       <Style.IconWrapper>
-        <ShoppingCartIcon />
+        <ShoppingCartIcon aria-label="Open Shopping Cart" />
       </Style.IconWrapper>   
     </Style.MenuGroup> 
   </Style.Wrapper>
