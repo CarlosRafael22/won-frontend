@@ -37,3 +37,11 @@ export const MenuGroup = styled.div`
         }
     `}
 `
+
+type FullMenuProps = {
+    isOpen: boolean
+}
+
+export const FullMenu = styled.nav<FullMenuProps>`
+    opacity: ${({ isOpen }) => isOpen ? 1 : 0 };
+`
