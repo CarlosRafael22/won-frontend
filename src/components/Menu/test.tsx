@@ -1,5 +1,6 @@
 import { screen, fireEvent } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
+import { WithLoggedUser } from './stories'
 
 import Menu from '.'
 
@@ -29,5 +30,23 @@ describe('<Menu />', () => {
     fireEvent.click(screen.getByLabelText(/close menu/i))
     expect(fullMenu.getAttribute('aria-hidden')).toBe('true')
     expect(fullMenu).toHaveStyle({ opacity: 0 })
+  })
+
+  it('should show only all menu options if user is logged', () => {
+    renderWithTheme(<WithLoggedUser {...WithLoggedUser.args} />)
+
+    expect(screen.getByText(/my account/i)).toBeInTheDocument()
+    expect(screen.getByText(/wishlist/i)).toBeInTheDocument()
+    expect(screen.queryByText(/sign up/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/log in now/i)).not.toBeInTheDocument()
+  })
+
+  it('should show all menu options and register buttons if user is not logged', () => {
+    renderWithTheme(<Menu />)
+
+    expect(screen.queryByText(/my account/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/wishlist/i)).not.toBeInTheDocument()
+    expect(screen.getByText(/sign up/i)).toBeInTheDocument()
+    expect(screen.getByText(/log in now/i)).toBeInTheDocument()
   })
 })
