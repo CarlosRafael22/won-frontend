@@ -6,6 +6,7 @@ import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 import * as Style from './styles'
 import Logo from 'components/Logo'
 import Button from 'components/Button'
+import MediaMatch from 'components/MediaMatch'
 
 export type MenuProps = {
   username?: string
@@ -16,19 +17,34 @@ const Menu = ({ username }: MenuProps) => {
   
   return (
   <Style.Wrapper>
-    <Style.IconWrapper>
-      <MenuIcon aria-label="Open Menu" onClick={() => setIsOpen(true)} />
-    </Style.IconWrapper>
+    <MediaMatch lessThan="medium">
+      <Style.IconWrapper>
+        <MenuIcon aria-label="Open Menu" onClick={() => setIsOpen(true)} />
+      </Style.IconWrapper>
+    </MediaMatch>
+
     <Style.LogoWrapper>
       <Logo hideOnMobile />
     </Style.LogoWrapper>
+
+    <MediaMatch greaterThan="medium">
+      <Style.NavMenuLink href="#">Home</Style.NavMenuLink>
+      <Style.NavMenuLink href="#">Explore</Style.NavMenuLink>
+    </MediaMatch>
+
     <Style.MenuGroup>
       <Style.IconWrapper>
         <SearchIcon aria-label="Search" />
       </Style.IconWrapper>
       <Style.IconWrapper>
         <ShoppingCartIcon aria-label="Open Shopping Cart" />
-      </Style.IconWrapper>   
+      </Style.IconWrapper>
+
+      {!username && (
+        <MediaMatch greaterThan="medium">
+          <Button>Sign in</Button>
+        </MediaMatch>
+      )}
     </Style.MenuGroup> 
 
     <Style.FullMenu aria-hidden={!isOpen} isOpen={isOpen}>
